@@ -36,7 +36,15 @@
       font-size: 1.2rem;
       font-weight: 500;
       color: #4da6ff;
-      margin-bottom: 20px;
+      margin-bottom: 5px;
+    }
+
+    /* Ultra minimal AR instruction */
+    .ar-note {
+      font-size: 0.55rem; /* much smaller */
+      font-style: italic;
+      color: #555;
+      margin-bottom: 12px;
     }
 
     /* Container for viewer and overlay */
@@ -64,9 +72,9 @@
       right: 10px;
       background: rgba(0,0,0,0.4);
       color: #fff;
-      font-size: 0.7rem;
-      padding: 4px 8px;
-      border-radius: 8px;
+      font-size: 0.6rem; /* smaller */
+      padding: 2px 6px;
+      border-radius: 6px;
       pointer-events: none; 
       backdrop-filter: blur(4px);
       animation: fadeInOut 4s ease-in-out infinite;
@@ -78,32 +86,33 @@
     }
 
     .info-text {
-      font-size: 0.95rem;
+      font-size: 0.6rem; /* smaller */
       color: #555;
-      margin-top: 20px;
-      line-height: 1.4;
+      margin-top: 15px;
+      line-height: 1.2;
       max-width: 320px;
     }
 
-    .audio-note {
-      font-size: 0.8rem;
-      color: #777;
-      margin-top: 5px;
-      font-style: italic;
+    .info-text .tag-us {
+      font-weight: 300;
+      opacity: 0.8;
     }
 
     footer {
-      font-size: 0.7rem;
+      font-size: 0.6rem; /* smaller */
       color: #777;
-      margin: 20px auto 5px;
+      margin: 15px auto 5px;
       max-width: 320px;
-      line-height: 1.3;
+      line-height: 1.2;
     }
   </style>
 </head>
 <body>
   <h1>Sajjan Raj Vaidya</h1>
   <h2>Khelauna Experience</h2>
+  <div class="ar-note">
+    Tap the "Launch AR" button below
+  </div>
 
   <div class="viewer-container">
     <model-viewer
@@ -127,27 +136,11 @@
 
   <div class="info-text">
     For the full AR experience, open this page in your mobile browser.<br>
-    Tag us in your AR experience! 📲
-  </div>
-  
-  <div class="audio-note">
-    Audio will start playing automatically (tap on mobile if it doesn’t).
+    <span class="tag-us">Tag us in your AR experience! 📲</span>
   </div>
 
   <footer>
-    Enjoy exploring the 3D model in AR.
+    <!-- Footer minimal -->
   </footer>
-
-  <!-- YouTube Audio Embed -->
-  <iframe id="ytAudio" 
-          width="0" 
-          height="0"
-          src="https://www.youtube.com/embed/KycyOZAMXYU?autoplay=1&controls=0&loop=1&playlist=KycyOZAMXYU" 
-          frameborder="0" 
-          allow="autoplay" 
-          allow="autoplay; encrypted-media" 
-          style="display:none;">
-  </iframe>
-
 </body>
 </html>
