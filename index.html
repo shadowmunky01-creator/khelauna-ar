@@ -6,7 +6,7 @@
   <title>Sajjan Raj Vaidya - Khelauna Experience</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Model Viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -32,6 +32,28 @@
       color: #111;
     }
 
+    /* Feat Karma Lala */
+    .feat {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #4da6ff;
+      margin: 5px 0 10px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .feat::after {
+      content: '';
+      display: block;
+      width: 100%;
+      max-width: 120px;
+      height: 1px; /* very thin line */
+      margin: 4px auto 0;
+      background: #bbb; /* light grey underline */
+      border-radius: 1px;
+    }
+
     h2 {
       font-size: 1.2rem;
       font-weight: 500;
@@ -39,20 +61,18 @@
       margin-bottom: 5px;
     }
 
-    /* Ultra minimal AR instruction */
     .ar-note {
-      font-size: 0.55rem; /* much smaller */
+      font-size: 0.55rem;
       font-style: italic;
       color: #555;
       margin-bottom: 12px;
     }
 
-    /* Container for viewer and overlay */
     .viewer-container {
       position: relative;
       width: 100%;
       max-width: 600px;
-      margin-top: 0;
+      margin-top: 20px; /* slight separation from text */
     }
 
     model-viewer {
@@ -65,14 +85,13 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
 
-    /* Footnote overlay with fade animation */
     .footnote-overlay {
       position: absolute;
       bottom: 10px;
       right: 10px;
       background: rgba(0,0,0,0.4);
       color: #fff;
-      font-size: 0.6rem; /* smaller */
+      font-size: 0.6rem;
       padding: 2px 6px;
       border-radius: 6px;
       pointer-events: none; 
@@ -86,7 +105,7 @@
     }
 
     .info-text {
-      font-size: 0.6rem; /* smaller */
+      font-size: 0.6rem;
       color: #555;
       margin-top: 15px;
       line-height: 1.2;
@@ -99,7 +118,7 @@
     }
 
     footer {
-      font-size: 0.6rem; /* smaller */
+      font-size: 0.6rem;
       color: #777;
       margin: 15px auto 5px;
       max-width: 320px;
@@ -109,7 +128,9 @@
 </head>
 <body>
   <h1>Sajjan Raj Vaidya</h1>
+  <div class="feat">Feat. Karma Lala</div>
   <h2>Khelauna Experience</h2>
+
   <div class="ar-note">
     Tap the "Launch AR" button below
   </div>
