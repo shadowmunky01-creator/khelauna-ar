@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sajjan Raj Vaidya - Khelauna Experience</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+  <!-- Model Viewer -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f4faff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin: 20px 0 5px;
+      color: #111;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #4da6ff; /* Light blue accent */
+      margin-bottom: 20px;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 70vh;
+      max-width: 600px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Glassmorphic Buttons */
+    .glass-button {
+      margin: 12px;
+      padding: 12px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 15px;
+      color: #111;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.55);
+      transform: scale(1.05);
+    }
+
+    .ar-button {
+      background: #4da6ff;
+      color: #fff;
+      border-radius: 20px;
+      padding: 14px 24px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      font-size: 0.7rem;
+      color: #777;
+      margin: 25px auto;
+      max-width: 320px;
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sajjan Raj Vaidya</h1>
+  <h2>Khelauna Experience</h2>
+
+  <model-viewer
+    id="viewer"
+    src="model.glb"
+    alt="3D Model"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    camera-controls
+    shadow-intensity="1"
+    touch-action="pan-y"
+    exposure="1"
+    environment-image="neutral">
+    <button class="ar-button" slot="ar-button">Launch AR</button>
+  </model-viewer>
+
+  <div class="button-group">
+    <button id="screenshotBtn" class="glass-button">📸 Screenshot</button>
+    <button id="recordBtn" class="glass-button">🎥 Record</button>
+  </div>
+
+  <footer>
+    For the best AR experience, open on your mobile device.  
+    Use the screenshot or record buttons above to capture moments with the 3D model.
+  </footer>
+
+  <script>
+    const viewer = document.getElementById('viewer');
+    const screenshotBtn = document.getElementById('screenshotBtn');
+    const recordBtn = document.getElementById('recordBtn');
+
+    // --- Screenshot Functionality ---
+    screenshotBtn.addEventListener('click', async () => {
+      const canvas = viewer.renderCanvas;
+      const img = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = 'khelauna_screenshot.png';
+      link.href = img;
+      link.click();
+    });
+
+    // --- Record Functionality ---
+    let mediaRecorder;
+    let recordedChunks = [];
+    let recording = false;
+
+    recordBtn.addEventListener('click', () => {
+      if (!recording) {
+        // Start recording
+        const stream = viewer.renderCanvas.captureStream(30);
+        mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) recordedChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'video/webm' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'khelauna_recording.webm';
+          link.click();
+          recordedChunks = [];
+        };
+
+        mediaRecorder.start();
+        recordBtn.textContent = "⏹ Stop";
+        recording = true;
+      } else {
+        // Stop recording
+        mediaRecorder.stop();
+        recordBtn.textContent = "🎥 Record";
+        recording = false;
+      }
+    });
+  </script>
+</body>
+</html>
